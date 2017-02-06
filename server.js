@@ -27,12 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-<<<<<<< HEAD:server.js
 require('./config/database');
-=======
-
-
->>>>>>> fc1225b88d350123fa3ffe965e35d9c31a9774ee:server.js
 app.use('/', index);
 app.use('/users', users);
 

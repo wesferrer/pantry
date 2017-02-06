@@ -13,7 +13,8 @@ var userSchema = new Schema({
 	favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Recipe'}],
 	pantry: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}],
 	restrictions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}],
-	shoppingList: [shoppingSchema]
+	shoppingList: [shoppingSchema],
+  googleId: String
 });
 
 module.exports = mongoose.model('User', userSchema);

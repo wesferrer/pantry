@@ -3,18 +3,18 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
 var request = require('request');
-var unirest = require('unirest');
-var spoonCtrl = require('../controller/recipes')
-
 const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 
 router.get('/:id', function (req, res, next){
 
 })
+var Recipe = require('../models/recipe');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', user: req.user });
+  Recipe.find({}, function(err, recipes) {
+  res.render('recipes/index', { recipes, user: req.user });
+  })
 });
 
 router.get('/auth/google', passport.authenticate(

@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
 var passport = require('passport');
-var unirest = require('unirest');
-
 require('dotenv').config();
 require('./config/database');
 require('./config/passport');
@@ -31,6 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+require('./config/database');
 app.use(session({
   secret: 'Pantry',
   resave: false,

@@ -4,26 +4,27 @@ var Schema = mongoose.Schema;
 
 var reviewSchema = new Schema ({
 	comment: String,
-	rating: Number,
-	reviewer: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+	rating: {
+		default: 3, 
+		enum: [1, 2, 3, 4, 5]
+	},
+	reviewer: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 var recipeSchema = new Schema({
+	recipeId: Number,
 	ingredients: [],
 	directions: String,
-	email: String,
-	calories: Number,
-	sodium: Number,
-	fat: Number,
-	protein: Number,
-	carbs: Number,
-	fiber: Number,
-	unit: String,
+	calories: {value: Number, unit: String}, //virtual property
+	sodium: {value: Number, unit: String},
+	fat: {value: Number, unit: String},
+	protein: {value: Number, unit: String},
+	carbs: {value: Number, unit: String},
+	fiber: {value: Number, unit: String},
 	cookingMinutes: Number,
 	preparationMinutes: Number,
 	servingSize: Number,
-	_id: Number,
-	image: String,
+	imageUrl: String,
 	review: [reviewSchema]
 });
 

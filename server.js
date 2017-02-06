@@ -7,15 +7,15 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
 var passport = require('passport');
+var unirest = require('unirest');
 
 require('dotenv').config();
 require('./config/database');
 require('./config/passport');
 
-
-
 var index = require('./routes/index');
 var users = require('./routes/users');
+var recipes = require('./routes/recipes')
 
 var app = express();
 

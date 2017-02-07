@@ -21,6 +21,8 @@ router.get('/', function(req, res, next) {
   });
 });
 
+
+router.post('/search', function(req, res, next) {
 router.post('/', function(req, res, next) {
  var options = {
    url: rootURL + '/recipes/search?query=' + req.body.search,

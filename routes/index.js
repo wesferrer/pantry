@@ -17,16 +17,12 @@ router.get('/', function(req, res, next) {
   console.log(options);
   request(options, function(err, response, body) {
     var recipeData = JSON.parse(body);
-
-console.log(recipeData)
-
     res.render('index', {user: req.user, recipeData});
   });
 });
 
 
 router.post('/search', function(req, res, next) {
-router.post('/', function(req, res, next) {
  var options = {
    url: rootURL + '/recipes/search?query=' + req.body.search,
    headers: {

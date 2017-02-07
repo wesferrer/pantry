@@ -8,7 +8,7 @@ const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 
 router.get('/', function(req, res, next) {
   var options = {
-    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/4632/summary",
+    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?number=6",
     headers: {
       'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
       'Accept': 'application/json'

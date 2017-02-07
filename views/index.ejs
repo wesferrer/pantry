@@ -1,38 +1,39 @@
 <html>
- <head>
+  <head>
 
-   <title>recipe</title>
+    <title>recipe</title>
 
-   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-   <link rel='stylesheet' href='/stylesheets/style.css' />
- </head>
- <body>
-   <div class="container">
-        <form class="col s6 push-s3">
-          <div class="row">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+<body>
+
+
+  <div class="jumbotron text-center">
+    <div class="container">
+      <h1>What's in your pantry?</h1>
+    </div>
+  </div>
+
+  <div class="container-fluid random-recipes">
+    <% recipeData.recipes.forEach(recipe => { %>
+      <div class="col-lg-3 col-sm-6 portfolio-item">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
           </div>
-          <div class="row">
-         <% if (user) { %>
-           <a class="waves-effect waves-light btn" href="/logout">Log Out</a>
-           <%= user.name %>
-         <% } else { %>
-            <div class="input-field">
-              <input id="email" type="email" class="validate">
-              <label for="email" class="active">Email</label>
-            </div>
-            <div class="input-field">
-              <input id="password" type="password" class="validate">
-              <label for="password" class="active">Password</label>
-            </div>
-          </div>
-         <a class="waves-effect waves-light btn" href="/auth/google">Log In Using Google</a>
-         <a class="waves-effect waves-light btn right" href="/login">Log In</a>
-         <% } %>
-        </form>
+        </div>
+        <div class="recipe-image-cropper">
+          <img src ="<%= recipe.image %>" class="img-responsive" size="40x40">
+        </div>
+        <div class="portfolio-caption">
+          <h4><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></h4>
+          <p class="text-muted">COOK TIME: <%= recipe.readyInMinutes %></p><br>
+          <p class="text-muted"><strong>Ingredients: </strong>
+            <%= recipe.extendedIngredients.map(ing => ing.name).join(', ') %>
+          </p>
+        </div>
       </div>
-   </div>
-    <%= recipeData.title %>
-    <p><%= recipeData.summary %></p>
- </body>
+    <% }) %>
+  </body>
 </html>

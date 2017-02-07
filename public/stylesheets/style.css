@@ -45,10 +45,6 @@ form.navbar-form.navbar-left {
   padding-top: 12px;
 }
 
-/*input.form-control.navbar-form {
-  width: 400px!important;
-}*/
-
 .navbar-form .form-control {
   width: 550px;
   height: 50px;
@@ -67,7 +63,6 @@ button.btn.btn-default {
   background-size: cover;
   height: 500px;
   color: white;
-  margin-bottom: 0;
 }
 
 div.col-lg-3.col-sm-6.portfolio-item {

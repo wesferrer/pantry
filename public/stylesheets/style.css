@@ -1,8 +1,88 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding-top: 70px;
 }
 
 a {
   color: #00B7FF;
+}
+
+a.btn.btn-default.navbar-btn {
+  margin-right: 30px;
+  margin-top: 20px;
+  background-color: #3b9792;
+  color: white;
+  border-color: transparent;
+}
+
+.dropdown {
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+a.btn.btn-default.navbar-btn:hover {
+  background-color: #3b9792;
+  color: white;
+  border-color: transparent;
+}
+
+ul.nav.navbar-nav.navbar-right {
+  height: 85px;
+}
+
+#logo-img{
+  height: 75px;
+  width: 75px;
+}
+
+#logo-div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+form.navbar-form.navbar-left {
+  padding-top: 12px;
+}
+
+/*input.form-control.navbar-form {
+  width: 400px!important;
+}*/
+
+.navbar-form .form-control {
+  width: 550px;
+  height: 50px;
+  margin-left: 40px;
+}
+
+button.btn.btn-default {
+  padding: 14px 25px;
+  background-color: #3b9792;
+  border-color: transparent;
+  color: white;
+}
+
+.jumbotron {
+  background-image: url('http://i.imgur.com/E5Pf77P.jpg');
+  background-size: cover;
+  height: 500px;
+  color: black;
+  margin-bottom: 0;
+}
+
+#jumbo-search {
+  margin-top: 125px;
+}
+
+#dropdownMenu1 {
+  height: 80px;
+  width: 80px;
+  border: 1px black solid;
+  border-radius: 50%;
+}
+
+#profile-img {
+  height: 75px;
+  width: 75px;
+  border-radius: 50%;
 }

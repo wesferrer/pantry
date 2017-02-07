@@ -24,19 +24,10 @@ router.get('/', function(req, res, next) {
   console.log(options);
   request(options, function(err, response, body) {
     var recipeData = JSON.parse(body);
-    options.title = recipeData.title;
-    request(options, function(err, response, body) {
-      recipeData.titles = JSON.parse(body);
-      console.log(body);
-      res.render('index', {user: req.user, recipeData: recipeData});
+    res.render('index', {user: req.user, recipeData: recipeData});
   });
 });
 
-});
-
-Recipe.find({}, function(err, recipes) {
-  res.render('recipes/index', { recipes, user: req.user });
-})
 //router.get('/', function(req, res, next) {
 //  res.render('index', { title: 'Express', user: req.user});
 //  console.log("hello");

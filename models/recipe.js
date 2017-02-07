@@ -14,6 +14,7 @@ var reviewSchema = new Schema ({
 });
 
 var recipeSchema = new Schema({
+  title: String,
 	recipeId: Number,
 	ingredients: [],
 	directions: String,

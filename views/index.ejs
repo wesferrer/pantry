@@ -7,7 +7,6 @@
    <link rel='stylesheet' href='/stylesheets/style.css'>
  </head>
  <body>
-
  <nav class="navbar navbar-default navbar-fixed-top">
    <div class="container-fluid">
      <!-- Brand and toggle get grouped for better mobile display -->
@@ -31,6 +30,37 @@
         <div class="dropdown text-center">
           <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <img src="http://i.imgur.com/Vy7xAMp.png" alt="default profile picture" id="profile-img">
+   <div class="container">
+     <div class="row">
+        <div class="col-xs-6">
+          <form action="/search" method="POST">
+            <div class="input-group">
+              <input type="text" name="search" class="form-control"
+                placeholder="Search for a recipe...">
+              <span class="input-group-btn">
+                <button class="btn btn-success"
+                  type="submit">Search</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+        <form class="col s6 push-s3">
+          <div class="row">
+          </div>
+          <div class="row">
+         <% if (user) { %>
+           <a class="waves-effect waves-light btn" href="/logout">Log Out</a>
+           <%= user.name %>
+         <% } else { %>
+            <div class="input-field">
+              <input id="email" type="email" class="validate">
+              <label for="email" class="active">Email</label>
+            </div>
+            <div class="input-field">
+              <input id="password" type="password" class="validate">
+              <label for="password" class="active">Password</label>
+            </div>
           </div>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <li><a href="/users/<%= user.id %>/">View Profile</a></li>
@@ -67,6 +97,8 @@
        </div>
     </div>
   </div>
-
 </body>
+    <%= recipeData.title %>
+    <p><%- recipeData.summary %></p>
+ </body>
 </html>

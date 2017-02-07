@@ -3,8 +3,13 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
 var request = require('request');
-var unirest = require('unirest');
-const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/';
+var Recipe = require('../models/recipe');
+const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
+
+router.get('/:id', function (req, res, next){
+
+})
+
 
 /* GET home page. */
 
@@ -26,8 +31,12 @@ router.get('/', function(req, res, next) {
       res.render('index', {user: req.user, recipeData: recipeData});
   });
 });
+
 });
 
+Recipe.find({}, function(err, recipes) {
+  res.render('recipes/index', { recipes, user: req.user });
+})
 //router.get('/', function(req, res, next) {
 //  res.render('index', { title: 'Express', user: req.user});
 //  console.log("hello");

@@ -3,16 +3,16 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var shoppingSchema = new Schema ({
-	recipe: [{type: mongoose.Schema.Types.ObjectId, ref: 'Recipe'}],
-	grocery: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}]
+	recipe: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
+	grocery: [{type: Schema.Types.ObjectId, ref: 'Ingredient'}]
 });
 
 var userSchema = new Schema({
 	name: String,
 	email: String,
-	favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Recipe'}],
-	pantry: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}],
-	restrictions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}],
+	favorites: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
+	pantry: [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
+	restrictions: [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
 	shoppingList: [shoppingSchema],
   googleId: String
 });

@@ -1,39 +1,72 @@
 <html>
-  <head>
+ <head>
+   <title>Home Page</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   <link rel='stylesheet' href='/stylesheets/style.css'>
+ </head>
+ <body>
 
-    <title>recipe</title>
+ <nav class="navbar navbar-default navbar-fixed-top">
+   <div class="container-fluid">
+     <!-- Brand and toggle get grouped for better mobile display -->
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+       <div id="logo-div">
+        <img src="http://i.imgur.com/XiMLRYZ.png" alt="salt shaker" id="logo-img">
+       </div>
+       <!-- <a class="navbar-brand" href="#">Pantry</a> -->
+     </div>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-<body>
-
+     <!-- Collect the nav links, forms, and other content for toggling -->
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="nav navbar-nav navbar-right">
+       <% if (user) { %>
+        <div class="dropdown text-center">
+          <div class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <img src="http://i.imgur.com/Vy7xAMp.png" alt="default profile picture" id="profile-img">
+          </div>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="/users/<%= user.id %>/">View Profile</a></li>
+            <li><a href="/logout">Log Out</a></li>
+          </ul>
+        </div>
+        <% } else { %>
+        <li><a href="/auth/google" class="btn btn-default navbar-btn">LOG IN | GOOGLE </a></li>
+        <% } %>
+       </ul>
+       <div>
+         <form class="navbar-form navbar-left">
+           <div class="form-group">
+             <input type="text" class="form-control" placeholder="Search Recipes! Ex: Chicken Pot Pie">
+           </div>
+           <button type="submit" class="btn btn-default">GO!</button>
+         </form>
+       </div>
+     </div><!-- /.navbar-collapse -->
+   </div>
+ </nav>
 
   <div class="jumbotron text-center">
     <div class="container">
       <h1>What's in your pantry?</h1>
+      <div>
+         <form class="navbar-form" id="jumbo-search">
+            <p>Search by your ingredients...</p>
+           <div class="form-group">
+             <input type="text" class="form-control" placeholder="Ground beef, cheese, etc.">
+           </div>
+           <button type="submit" class="btn btn-default">GO!</button>
+         </form>
+       </div>
     </div>
   </div>
 
-  <div class="container-fluid random-recipes">
-    <% recipeData.recipes.forEach(recipe => { %>
-      <div class="col-lg-3 col-sm-6 portfolio-item">
-        <div class="portfolio-hover">
-          <div class="portfolio-hover-content">
-            <i class="fa fa-plus fa-3x"></i>
-          </div>
-        </div>
-        <div class="recipe-image-cropper">
-          <img src ="<%= recipe.image %>" class="img-responsive" size="40x40">
-        </div>
-        <div class="portfolio-caption">
-          <h4><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></h4>
-          <p class="text-muted">COOK TIME: <%= recipe.readyInMinutes %></p><br>
-          <p class="text-muted"><strong>Ingredients: </strong>
-            <%= recipe.extendedIngredients.map(ing => ing.name).join(', ') %>
-          </p>
-        </div>
-      </div>
-    <% }) %>
-  </body>
+</body>
 </html>

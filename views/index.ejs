@@ -9,6 +9,20 @@
  </head>
  <body>
    <div class="container">
+     <div class="row">
+        <div class="col-xs-6">
+          <form action="/search" method="POST">
+            <div class="input-group">
+              <input type="text" name="search" class="form-control"
+                placeholder="Search for a recipe...">
+              <span class="input-group-btn">
+                <button class="btn btn-success"
+                  type="submit">Search</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
         <form class="col s6 push-s3">
           <div class="row">
           </div>
@@ -33,6 +47,6 @@
       </div>
    </div>
     <%= recipeData.title %>
-    <p><%= recipeData.summary %></p>
+    <p><%- recipeData.summary %></p>
  </body>
 </html>

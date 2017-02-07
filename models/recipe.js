@@ -2,6 +2,12 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+var ingredientSchema = new Schema({
+  name: String,
+  amount: Number,
+  unit: String
+});
+
 var reviewSchema = new Schema ({
 	comment: String,
 	rating: {
@@ -16,7 +22,7 @@ var reviewSchema = new Schema ({
 var recipeSchema = new Schema({
   title: String,
 	recipeId: Number,
-	ingredients: [],
+	ingredients: [ingredientSchema],
 	directions: String,
 	calories: {value: Number, unit: String}, //virtual property
 	sodium: {value: Number, unit: String},

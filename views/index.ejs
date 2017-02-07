@@ -68,5 +68,27 @@
     </div>
   </div>
 
+  <div class="container-fluid random-recipes">
+    <% recipeData.recipes.forEach(recipe => { %>
+      <div class="col-lg-3 col-sm-6 portfolio-item">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <div class="recipe-image-cropper">
+          <img src ="<%= recipe.image %>" class="img-responsive" size="40x40">
+        </div>
+        <div class="portfolio-caption">
+          <h4><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></h4>
+          <p class="text-muted">COOK TIME: <%= recipe.readyInMinutes %></p><br>
+          <p class="text-muted"><strong>Ingredients: </strong>
+            <%= recipe.extendedIngredients.map(ing => ing.name).join(', ') %>
+          </p>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
 </body>
 </html>

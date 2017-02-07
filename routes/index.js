@@ -6,13 +6,6 @@ var request = require('request');
 var Recipe = require('../models/recipe');
 const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 
-router.get('/:id', function (req, res, next){
-
-})
-
-
-/* GET home page. */
-
 router.get('/', function(req, res, next) {
   var options = {
     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/4632/summary",
@@ -24,14 +17,9 @@ router.get('/', function(req, res, next) {
   console.log(options);
   request(options, function(err, response, body) {
     var recipeData = JSON.parse(body);
-    res.render('index', {user: req.user, recipeData: recipeData});
+    res.render('index', {user: req.user, recipeData});
   });
 });
-
-//router.get('/', function(req, res, next) {
-//  res.render('index', { title: 'Express', user: req.user});
-//  console.log("hello");
-//});
 
 router.get('/auth/google', passport.authenticate(
   'google',

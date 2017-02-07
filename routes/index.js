@@ -21,7 +21,9 @@ router.get('/', function(req, res, next) {
   });
 });
 
+
 router.post('/search', function(req, res, next) {
+router.post('/', function(req, res, next) {
  var options = {
    url: rootURL + '/recipes/search?query=' + req.body.search,
    headers: {
@@ -31,11 +33,9 @@ router.post('/search', function(req, res, next) {
  };
  request(options, function(err, response, body) {
    var recipeData = JSON.parse(body);
-   console.log(recipeData);
    res.render('search-results', {user: req.user, recipeData});
  });
 });
-
 
 router.get('/auth/google', passport.authenticate(
   'google',

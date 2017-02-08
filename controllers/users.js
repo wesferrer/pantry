@@ -1,4 +1,6 @@
 var User = require('../models/user');
+var request = require('request');
+const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 
 module.exports = {
   show,
@@ -20,5 +22,9 @@ function edit(req, res, next) {
 // function update(req, res, next) {
 
 // }
+
+function addToPantry(req, res, next) {
+
+}
 
 //for recipes, vast majority of code goes here. if we don't have id stored, then we have to create ourselves.

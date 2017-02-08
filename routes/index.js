@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 //general recipe search
 router.post('/search', function(req, res, next) {
  var options = {
-   url: rootURL + '/recipes/search?query=' + req.body.search,
+   url: rootURL + '/recipes/search?number=27&offset=0&query=' + req.body.search,
    headers: {
      'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
      'Accept': 'application/json'
@@ -37,19 +37,21 @@ router.post('/search', function(req, res, next) {
 });
 
 //search by ingredient
-// router.post('/search', function(req, res, next) {
-//  var options = {
-//    url: rootURL + 'findByIngredients?ingredients=' + req.body.search,
-//    headers: {
-//      'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
-//      'Accept': 'application/json'
-//    }
-//  };
-//  request(options, function(err, response, body) {
-//    var recipeData = JSON.parse(body);
-//    res.render('search-results', {user: req.user, recipeData});
-//  });
-// });
+
+router.post('/searchi', function(req, res, next) {
+ var options = {
+   url: rootURL + 'findByIngredients?ingredients=' + req.body.search,
+   headers: {
+     'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
+     'Accept': 'application/json'
+   }
+ };
+ request(options, function(err, response, body) {
+   var recipeData = JSON.parse(body);
+   res.render('search-results', {user: req.user, recipeData});
+ });
+});
+
 
 router.get('/auth/google', passport.authenticate(
   'google',
@@ -68,5 +70,10 @@ router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+// function isLoggedIn(req, res, next) {
+//   if ( req.isAuthenticated() ) return next();
+//   res.redirect('/auth/google');
+// }
 
 module.exports = router;

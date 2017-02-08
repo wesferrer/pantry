@@ -1,11 +1,10 @@
-var express = require('express');
-var router = express.router();
+var Recipe = require('../../models/recipe');
 
 
 module.exports = {
-  getAllRecipes
+  getAllRecipes,
   getOneRecipe
-}
+};
 
 function getAllRecipes(req, res, next){
   Recipe.find({}, function(err, recipes){

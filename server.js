@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
 var passport = require('passport');
+var cors = require('cors');
+
 
 require('dotenv').config();
 require('./config/database');
@@ -15,6 +17,7 @@ require('./config/passport');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var recipes = require('./routes/recipes')
+var api = require('./routes/api')
 
 var app = express();
 
@@ -38,11 +41,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/recipes', recipes);
-
+app.use('/api/recipes', api);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -37,6 +37,7 @@ router.post('/search', function(req, res, next) {
 });
 
 //search by ingredient
+
 router.post('/searchi', function(req, res, next) {
  var options = {
    url: rootURL + 'findByIngredients?ingredients=' + req.body.search,
@@ -50,6 +51,7 @@ router.post('/searchi', function(req, res, next) {
    res.render('search-results', {user: req.user, recipeData});
  });
 });
+
 
 router.get('/auth/google', passport.authenticate(
   'google',

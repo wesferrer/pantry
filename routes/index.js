@@ -6,6 +6,7 @@ var request = require('request');
 var Recipe = require('../models/recipe');
 const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 
+//index, need to edit
 router.get('/', function(req, res, next) {
   var options = {
     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?number=8",
@@ -38,6 +39,7 @@ router.post('/search', function(req, res, next) {
 });
 
 //search by ingredient
+
 router.post('/searchi', function(req, res, next) {
  var options = {
    url: rootURL + '/recipes/findByIngredients?ingredients=' + req.body.search + '&number=10',

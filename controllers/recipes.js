@@ -28,6 +28,7 @@ function addFav(req, res, next) {
     if (recipe) {
       if (!req.user.favorites.some(fav => fav.equals(recipe._id))) {
         req.user.favorites.push(recipe._id);
+        console.log(recipe._id)
         req.user.save(function(err) {
           getPopulatedUser(req.user._id)
           .then(user => res.render('recipes/index', {recipes: user.favorites}));

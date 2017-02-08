@@ -62,8 +62,9 @@ button.btn.btn-default {
   color: white;
 }
 
-.jumbotron {
-  background-image: url('http://i.imgur.com/fYl40wj.png');
+#front-jumbo{
+  background-image: url('http://i.imgur.com/E5Pf77P.jpg');
+
   background-size: cover;
   height: 500px;
   color: white;

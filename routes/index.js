@@ -6,6 +6,7 @@ var request = require('request');
 var Recipe = require('../models/recipe');
 const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 
+//index, need to edit
 router.get('/', function(req, res, next) {
   var options = {
     url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?number=8",
@@ -37,7 +38,7 @@ router.post('/search', function(req, res, next) {
 });
 
 //search by ingredient
-router.post('/search', function(req, res, next) {
+router.post('/ingredientSearch', function(req, res, next) {
  var options = {
    url: rootURL + 'findByIngredients?ingredients=' + req.body.search,
    headers: {
@@ -51,6 +52,7 @@ router.post('/search', function(req, res, next) {
  });
 });
 
+//oauth
 router.get('/auth/google', passport.authenticate(
   'google',
   { scope: ['profile', 'email'] }

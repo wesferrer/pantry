@@ -18,6 +18,7 @@ function addFav(req, res, next) {
 console.log('FOUND IT')
       if (!req.user.favorites.some(fav => fav._id === recipe._id)) {
         req.user.favorites.push(recipe._id);
+        console.log(recipe._id)
         req.user.save(function(err) {
           res.render('recipes/index', {recipe});
         });

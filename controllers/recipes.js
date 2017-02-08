@@ -19,7 +19,14 @@ function show(req, res, next) {
 	var query = (req.params.recipeId.length < 24) ?
 		{recipeId: req.params.recipeId} : {_id: req.params.recipeId};
 	Recipe.findOne(query, function (err, recipe) {
-		res.render('recipes/show', {recipe});
+    if(recipe) {
+  		res.render('recipes/show', {recipe});
+    } else {
+      addRecipeToDb(req.params.recipeId)
+      .then(function(recipe) {
+        res.render('recipes/show', {recipe});
+      });
+    }
 	})
 }
 
@@ -38,47 +45,14 @@ function addFav(req, res, next) {
         .then(user => res.render('recipes/index', {recipes: user.favorites}));
       } ;
     } else {
-      // fetch recipe from the api
-      var options = {
-        url: rootURL +'/recipes/' + req.params.recipeId + '/information?includeNutrition=true',
-        headers: {
-          'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
-          'Accept': 'application/json'
-        }
-      };
-      request.get(options, function(err, response, body) {
-        var recipeData = JSON.parse(body);
-        var newRecipe = new Recipe({
-          title: recipeData.title,
-          recipeId: recipeData.id,
-          directions: recipeData.instructions,
-          // calories: recipeData.nutrition.nutrients,
-        // sodium:
-              // fat:
-              // protein:
-              // carbs:
-              // fiber:
-          cookingMinutes: recipeData.cookingMinutes,
-          preparationMinutes: recipeData.preparationMinutes,
-          servingSize: recipeData.servings,
-          imageUrl: recipeData.image
-              // review:
-        });
-        recipeData.extendedIngredients.forEach(function(ing) {
-          newRecipe.ingredients.push({
-            name: ing.name,
-            amount: ing.amount,
-            unit: ing.unit
-          });
-        });
-        newRecipe.save(function(err) {
-          req.user.favorites.push(newRecipe._id);
-          req.user.save(function(err) {
-            getPopulatedUser(req.user._id)
-            .then(user => res.render('recipes/index', {recipes: user.favorites}));
-          });
-        });
+    addRecipeToDb(req.params.recipeId)
+    .then(recipe => {
+      req.user.favorites.push(recipe._id);
+      req.user.save(function(err) {
+        getPopulatedUser(req.user._id)
+        .then(user => res.render('recipes/index', {recipes: user.favorites}));
       });
+    });
     }
   });
 }
@@ -88,6 +62,46 @@ function addFav(req, res, next) {
 
 function getPopulatedUser(userId) {
   return User.findById(userId).populate('favorites').exec();
-  // res.render('recipes/index', {user: req.user, recipes: user.favorites}); - if we need to use user
 };
+
+function addRecipeToDb (recipeApiId) {
+  var options = {
+    url: rootURL +'/recipes/' + recipeApiId + '/information?includeNutrition=true',
+    headers: {
+      'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
+      'Accept': 'application/json'
+    }
+  };
+  return new Promise(function(resolve, reject) {
+    request.get(options, function(err, response, body) {
+      var recipeData = JSON.parse(body);
+      var newRecipe = new Recipe({
+        title: recipeData.title,
+        recipeId: recipeData.id,
+        directions: recipeData.instructions,
+        // calories: recipeData.nutrition.nutrients,
+      // sodium:
+            // fat:
+            // protein:
+            // carbs:
+            // fiber:
+        cookingMinutes: recipeData.cookingMinutes,
+        preparationMinutes: recipeData.preparationMinutes,
+        servingSize: recipeData.servings,
+        imageUrl: recipeData.image
+            // review:
+      });
+      recipeData.extendedIngredients.forEach(function(ing) {
+        newRecipe.ingredients.push({
+          name: ing.name,
+          amount: ing.amount,
+          unit: ing.unit
+        });
+      });
+      resolve(newRecipe);
+    });
+  }).then(function(recipe) {
+    return recipe.save();
+  });
+}
  

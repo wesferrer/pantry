@@ -37,19 +37,19 @@ router.post('/search', function(req, res, next) {
 });
 
 //search by ingredient
-router.post('/search', function(req, res, next) {
- var options = {
-   url: rootURL + 'findByIngredients?ingredients=' + req.body.search,
-   headers: {
-     'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
-     'Accept': 'application/json'
-   }
- };
- request(options, function(err, response, body) {
-   var recipeData = JSON.parse(body);
-   res.render('search-results', {user: req.user, recipeData});
- });
-});
+// router.post('/search', function(req, res, next) {
+//  var options = {
+//    url: rootURL + 'findByIngredients?ingredients=' + req.body.search,
+//    headers: {
+//      'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
+//      'Accept': 'application/json'
+//    }
+//  };
+//  request(options, function(err, response, body) {
+//    var recipeData = JSON.parse(body);
+//    res.render('search-results', {user: req.user, recipeData});
+//  });
+// });
 
 router.get('/auth/google', passport.authenticate(
   'google',

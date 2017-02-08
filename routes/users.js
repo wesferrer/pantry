@@ -9,6 +9,8 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', isLoggedIn, usersCtrl.show);
 router.get('/:id/edit', isLoggedIn, usersCtrl.edit);
+router.put('/:id/restrictions/new', isLoggedIn, usersCtrl.addRestrictions);
+router.delete('/restrictions/:rId', isLoggedIn, usersCtrl.removeRestrictions);
 
 function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();

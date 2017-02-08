@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.router();
 
-
 module.exports = {
   getAllRecipes
   getOneRecipe

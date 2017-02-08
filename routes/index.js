@@ -9,7 +9,7 @@ const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 //index, need to edit
 router.get('/', function(req, res, next) {
   var options = {
-    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?number=8",
+    url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?number=1",
     headers: {
       'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
       'Accept': 'application/json'
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
 //general recipe search
 router.post('/search', function(req, res, next) {
  var options = {
-   url: rootURL + '/recipes/search?number=25&offset=0&query=' + req.body.search,
+   url: rootURL + '/recipes/search?number=1&offset=0&query=' + req.body.search,
    headers: {
      'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
      'Accept': 'application/json'
@@ -42,7 +42,7 @@ router.post('/search', function(req, res, next) {
 
 router.post('/searchi', function(req, res, next) {
  var options = {
-   url: rootURL + '/recipes/findByIngredients?ingredients=' + req.body.search + '&number=10',
+   url: rootURL + '/recipes/findByIngredients?ingredients=' + req.body.search + '&number=1',
    headers: {
      'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
      'Accept': 'application/json'

@@ -14,6 +14,7 @@ function index(req, res, next) {
   .then(user => res.render('recipes/index', {recipes: user.favorites}));
 }
 
+
 function show(req, res, next) {
 	var query = (req.params.recipeId.length < 24) ?
 		{recipeId: req.params.recipeId} : {_id: req.params.recipeId};

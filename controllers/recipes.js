@@ -1,29 +1,40 @@
 var Recipe = require('../models/recipe');
+var User = require('../models/user');
 var request = require('request');
 const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 
 module.exports = {
   show: show,
-  addFav: addFav
+  addFav: addFav,
+  index: index
+};
+
+function index(req, res, next) {
+  getPopulatedUser(req.user._id)
+  .then(user => res.render('recipes/index', {recipes: user.favorites}));
 }
 
 function show(req, res, next) {
-
+	var query = (req.params.recipeId.length < 24) ?
+		{recipeId: req.params.recipeId} : {_id: req.params.recipeId};
+	Recipe.findOne(query, function (err, recipe) {
+		res.render('recipes/show', {recipe});
+	})
 }
 
 function addFav(req, res, next) {
   Recipe.findOne({recipeId: req.params.recipeId}, function(err, recipe) {
     if (recipe) {
-
-console.log('FOUND IT')
-      if (!req.user.favorites.some(fav => fav._id === recipe._id)) {
+      if (!req.user.favorites.some(fav => fav.equals(recipe._id))) {
         req.user.favorites.push(recipe._id);
         req.user.save(function(err) {
-          res.render('recipes/index', {recipe});
+          getPopulatedUser(req.user._id)
+          .then(user => res.render('recipes/index', {recipes: user.favorites}));
         });
       } else {
-          res.render('recipes/index', {recipe});
-        }
+        getPopulatedUser(req.user._id)
+        .then(user => res.render('recipes/index', {recipes: user.favorites}));
+      } ;
     } else {
       // fetch recipe from the api
       var options = {
@@ -35,11 +46,6 @@ console.log('FOUND IT')
       };
       request.get(options, function(err, response, body) {
         var recipeData = JSON.parse(body);
-
-
-console.log(recipeData)
-
-
         var newRecipe = new Recipe({
           title: recipeData.title,
           recipeId: recipeData.id,
@@ -64,41 +70,22 @@ console.log(recipeData)
           });
         });
         newRecipe.save(function(err) {
-          res.render('recipes/show', {user: req.user, recipe: newRecipe});
+          req.user.favorites.push(newRecipe._id);
+          req.user.save(function(err) {
+            getPopulatedUser(req.user._id)
+            .then(user => res.render('recipes/index', {recipes: user.favorites}));
+          });
         });
       });
-      // addRecipe(options);// then call the addRecipe helper function that adds to collection
-      // req.user.favorites.push(recipe._id);// then add recipe to req.user.favorites
-      // user.save(function (err, user) {
-      //   if (err) console.log('error');
-      //   res.render('recipes/show', {recipe}); // then after added, res.render('recipes/show', {recipe});
-      // });
     }
   });
 }
 
 
-
-
 // helper functions
 
-// function addRecipe(recipe) {
-// //var obj = parse?JSON object;
-//   Recipe.create({
-//     title: recipe.title,
-//     recipeId: recipe.id,
-//     ingredients: recipe.ingredients.name,
-//     directions: recipe.instructions,
-//     calories: recipe.nutrition.nutrients,
-//     // sodium:
-//     // fat:
-//     // protein:
-//     // carbs:
-//     // fiber:
-//     cookingMinutes: recipe.cookingMinutes,
-//     preparationMinutes: recipe.preparationMinutes,
-//     servingSize: recipe.servings,
-//     imageUrl: recipe.image,
-//     // review:
-//   });
-
+function getPopulatedUser(userId) {
+  return User.findById(userId).populate('favorites').exec();
+  // res.render('recipes/index', {user: req.user, recipes: user.favorites}); - if we need to use user
+};
+ 

@@ -1,1 +1,9 @@
+
 hey, this is the recipe index that shows all of a user's favorited recipes
+
+
+<div class="container-fluid random-recipes">
+    <% recipes.forEach(recipe => { %>
+          <h4><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></h4>
+    <% }) %>
+</div>

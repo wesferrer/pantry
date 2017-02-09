@@ -23,11 +23,6 @@ function edit(req, res, next) {
 
 function addRestrictions(req, res, next) {
   req.user.restrictions.push(req.body.restrictions);
-  // req.body.restrictions = req.body.restrictions.replace(/\s*,\s*/g, ',');
-  // if (req.body.restrictions) req.body.restrictions = req.body.restrictions.split(',');
-  // for (var key in req.body.restrictions) {
-    // if (req.body.restrictions[key] === '') delete req.body.restrictions[key];
-  // }
   req.user.save(function(err) {
     res.redirect('/users/' + req.user.id + '/edit');
   });
@@ -36,6 +31,6 @@ function addRestrictions(req, res, next) {
 function removeRestrictions(req, res, next) {
   req.user.restrictions.splice(req.user.restrictions.indexOf(req.params.rId), 1);
   req.user.save(function(err) {
-    res.redirect('/users/' + req.user.id);
+    res.json({msg: 'Deleted restriction'});
   });
 }

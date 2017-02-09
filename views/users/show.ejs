@@ -14,6 +14,12 @@
               <li><%= r %></li>
             <% }) %>
           </ul>
+          Your Pantry:
+          <ul>
+            <% user.pantry.forEach(function(p) { %>
+              <li><%= p %></li>
+            <% }) %>
+          </ul>
           <!-- <div class="col s12"><%#= user.pantry %></div> -->
           <!-- <div class="col s12"><%#= user.grocery %></div> -->
         </div>

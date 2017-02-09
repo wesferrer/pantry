@@ -75,16 +75,39 @@ router.post('/searchc', function(req, res, next) {
    var aller1 = req.body.allergy1;
    var aller2 = req.body.allergy2;
    var aller3 = req.body.allergy3;
-   // var p = req.user;
-   // var e = p.restrictions;
-   // var mystring = e.toString();
-   // var o = mystring.replace(/,/g , "&2C");
-   // console.log(options);
-   // console.log(complexData);
-   // console.log(o);
    res.render('search-results', {user: req.user, recipes: complexData.results, main, ingred1, ingred2, ingred3, aller1, aller2, aller3});
  });
 });
+
+//Pantry search
+router.post('/searchp', function(req, res, next) {
+  var z = req.user.pantry;
+  var f = req.user.restrictions;
+  var mystring = z.toString();
+  var o = mystring.replace(/,/g , "%2C+");
+  var string = f.toString();
+  var w = string.replace(/,/g , "%2C+");
+ var options = {
+   url: rootURL + '/recipes/searchComplex?excludeIngredients=' + w + '&includeIngredients=' + o + '&instructionsRequired=true&&fillIngredients=true&limitLicense=false&number=5&offset=0&ranking=1',
+   headers: {
+     'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
+     'Accept': 'application/json'
+   }
+ };
+ request(options, function(err, response, body) {
+   var pantryData = JSON.parse(body);
+   var main = req.body.main;
+   var ingred1 = z[0];
+   var ingred2 = z[1];
+   var ingred3 = z[2];
+   var aller1 = f[0];
+   var aller2 = f[1];
+   var aller3 = f[2];
+   res.render('search-results', {user: req.user, recipes: pantryData.results, main, ingred1, ingred2, ingred3, aller1, aller2, aller3});
+ });
+});
+
+
 
 router.get('/auth/google', passport.authenticate(
   'google',

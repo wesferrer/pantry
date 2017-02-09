@@ -28,4 +28,26 @@ $('#restrictions').on('click', 'button', function(evt) {
 })
 </script>
 
+<ul id="userPantry">
+  <% user.pantry.forEach(function(p) { %>
+    <li><%= p %>&nbsp; <button class="btn btn-xs btn-danger" data-id="<%= p %>">X</button></li>
+  <% }) %>
+</ul>
 
+<form action="/users/<%= user.id %>/pantry/new?_method=PUT" method="post">
+  <label>Add Ingredients to your Pantry:
+    <input type="text" name="pantry">
+  </label>
+  <input class="btn btn-default" type="submit" value="Save">
+</form>
+
+<script>
+$('#userPantry').on('click', 'button', function(evt) {
+  console.log($(this).attr('data-id'));
+  $.ajax({
+    url: '/users/pantry/' + $(this).attr('data-id'),
+    method: 'DELETE'
+  });
+  $(this).closest('li').remove();
+})
+</script>

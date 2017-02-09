@@ -20,7 +20,7 @@ function show(req, res, next) {
 		{recipeId: req.params.recipeId} : {_id: req.params.recipeId};
 	Recipe.findOne(query, function (err, recipe) {
     if(recipe) {
-  		res.render('recipes/show', {recipe});
+  		res.render('recipes/show', {user: req.user, recipe});
     } else {
       addRecipeToDb(req.params.recipeId)
       .then(function(recipe) {

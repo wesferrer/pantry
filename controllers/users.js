@@ -29,7 +29,7 @@ function addRestrictions(req, res, next) {
     // if (req.body.restrictions[key] === '') delete req.body.restrictions[key];
   // }
   req.user.save(function(err) {
-    res.redirect('/users/' + user.id + '/edit');
+    res.redirect('/users/' + req.user.id + '/edit');
   });
 }
 

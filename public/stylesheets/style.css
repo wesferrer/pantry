@@ -26,6 +26,11 @@ a.btn.btn-default.navbar-btn:hover {
   border-color: transparent;
 }
 
+nav.navbar.navbar-default.navbar-fixed-top {
+  height: 70px;
+}
+
+
 nav.navbar.navbar-inverse.navbar-fixed-top {
   z-index: 1;
 }
@@ -35,8 +40,8 @@ ul.nav.navbar-nav.navbar-right {
 }
 
 #logo-img{
-  height: 75px;
-  width: 75px;
+  height: 55px;
+  width: 55px;
 }
 
 #logo-div {
@@ -106,20 +111,20 @@ div.img.img-responsive {
 }
 
 #dropdownMenu1 {
-  height: 80px;
-  width: 80px;
+  height: 55px;
+  width: 55px;
   border: 1px black solid;
   border-radius: 50%;
 }
 
 #profile-img {
-  height: 75px;
-  width: 75px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
 }
 
 .navbar.navbar-inverse {
-  margin-top: 96px;
+  margin-top: 70px;
   border-radius: 0;
 }
 

@@ -26,7 +26,7 @@
 			</div>
 
 
-			
+
 			<div class="ingr"><h3>INGREDIENTS: </h3><br>
 				<% recipe.ingredients.forEach(function(ing) { %>
 					<li><strong><%= ing.name.toUpperCase() %></strong> - <%= ing.amount.toFixed(2) %> <%= ing.unit %></li><br>
@@ -43,4 +43,48 @@
 				.join('') %></p>
 		<!-- </div> -->
 	</div>
+<div class="container-fluid">
+	<div class="recipe-image-cropper">
+		<img src="<%= recipe.imageUrl %>" class="img-responsive">
+	</div>
+	<h2><%= recipe.title.toUpperCase() %></h2>
+	<p>Preparation Time: <%= recipe.preparationMinutes %><br>
+	Cook Time: <%= recipe.cookingMinutes %><br>
+	Seving Size: <%= recipe.servingSize %><br>
+	<h3>Directions: </h3><%= recipe.directions %><br>
+	<h3>Ingredients: </h3><br>
+	<% recipe.ingredients.forEach(function(ing) { %>
+		<li><%= ing.name %> - <%= ing.amount %> <%= ing.unit %></li><br>
+	<% }) %>
+	<h3>Nutrients: </h3><br>
+	<%- recipe.nutrients
+		.filter(nut => 'Calories|Fat|Sugar|Sodium|Protein|Carbohydrates|Cholesterol'.includes(nut.title))
+		.map(nut => nut.title + ": " + nut.amount + " " + nut.unit + "<br>")
+		.join('') %>
+	</p>
+	<h3>Review:</h3>
+	<ul>
+		<% recipe.reviews.forEach(function(rev) { %>
+			<li><%= rev.comment %> | rating: <%= rev.rating %></li>
+			<%= rev.reviewer%>
+		<% }); %>
+	</ul>
+
+	<form method="POST" action="/recipes/<%= recipe._id %>/reviews">
+		<textarea name="comment" id="" cols="30" rows="10"></textarea>
+		<div class="input-group">
+			<label for="rating">Rating: </label>
+			<select name="rating" id="rating" class="form-control">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</div>
+		<input type="submit" value="Add Review" class="btn btn-success">
+	</form>
 </div>
+
+</body>
+</html>

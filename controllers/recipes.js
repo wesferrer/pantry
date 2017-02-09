@@ -7,7 +7,9 @@ module.exports = {
   show: show,
   addFav: addFav,
   index: index,
-  removeFav: removeFav
+  removeFav: removeFav,
+  createReview: createReview,
+  newReview: newReview
 };
 
 function index(req, res, next) {
@@ -112,17 +114,18 @@ function addRecipeToDb (recipeApiId) {
   });
 }
 
-// function newComment(req, res, next) {
-//     res.render('recipes/comments');
-// }
+function newReview(req, res, next) {
+    res.render('recipes/comments');
+}
 
-// function createComment(req, res, next) {
-//  var content = req.body.content;
-//  Recipe.findById(req.params.id, function(err, beer) {
-//    recipe.comments.push({content});
-//    recipe.save(function (err, d) {
-//      if (err) return res.render('/');
-//       res.redirect('/recipes/' + req.params.id);
-//     });
-//  });
-// };
+function createReview(req, res, next) {
+  console.log("hey from hereeeeeeeeee");
+ Recipe.findById(req.params.id, function(err, recipe) {
+   recipe.reviews.push(req.body);
+   recipe.reviewer = req.user.name;
+   recipe.save(function (err, d) {
+     if (err) return res.render('/');
+      res.redirect('/recipes/' + req.params.id);
+    });
+ });
+}

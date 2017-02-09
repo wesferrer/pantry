@@ -19,10 +19,10 @@ a.btn.btn-default.navbar-btn {
   line-height: 10px;
 }
 
-.dropdown {
+/*.dropdown {
   margin-right: 20px;
   margin-top: 10px;
-}
+}*/
 
 a.btn.btn-default.navbar-btn:hover {
   background-color: #3b9792;
@@ -104,10 +104,13 @@ div.img.img-responsive {
 #dropdownMenu1 {
   height: 55px;
   width: 55px;
+/*#dropdownMenu1 {
+  height: 80px;
+  width: 80px;
   border: 1px black solid;
   border-radius: 50%;
 }
-
+*/
 #profile-img {
   height: 50px;
   width: 50px;
@@ -162,7 +165,7 @@ div.ingr {
 div.col-md-8.right-column {
   padding-left: 40px;
   padding-bottom: 40px;
-  padding-top: 
+  padding-top:
 }
 
 .recipe-image-cropper img {

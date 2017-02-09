@@ -9,7 +9,6 @@ router.delete('/:id/fav', isLoggedIn, recipesCtrl.removeFav);
 router.get('/:id/reviews/new', recipesCtrl.newReview);
 router.post('/:id/reviews', recipesCtrl.createReview);
 
-
 function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();
   res.redirect('/auth/google');

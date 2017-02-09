@@ -101,16 +101,12 @@ div.img.img-responsive {
   margin-top: 125px;
 }
 
+
 #dropdownMenu1 {
   height: 55px;
   width: 55px;
-/*#dropdownMenu1 {
-  height: 80px;
-  width: 80px;
-  border: 1px black solid;
-  border-radius: 50%;
 }
-*/
+
 #profile-img {
   height: 50px;
   width: 50px;

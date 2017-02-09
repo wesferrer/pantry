@@ -6,6 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+button.btn.btn-default {
+  margin-bottom: 17px;
+}
 
 a.btn.btn-default.navbar-btn {
   margin-right: 30px;

@@ -9,10 +9,11 @@ a {
 
 a.btn.btn-default.navbar-btn {
   margin-right: 30px;
-  margin-top: 20px;
+  margin-top: 14px;
   background-color: #3b9792;
   color: white;
   border-color: transparent;
+  line-height: 10px;
 }
 
 .dropdown {

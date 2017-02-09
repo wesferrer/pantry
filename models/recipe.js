@@ -19,17 +19,18 @@ var reviewSchema = new Schema ({
 	reviewer: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
+var nutrientSchema = new Schema ({
+	title: String,
+	amount: Number,
+	unit: String
+})
+
 var recipeSchema = new Schema({
   title: String,
 	recipeId: Number,
 	ingredients: [ingredientSchema],
 	directions: String,
-	calories: {value: Number, unit: String}, //virtual property
-	sodium: {value: Number, unit: String},
-	fat: {value: Number, unit: String},
-	protein: {value: Number, unit: String},
-	carbs: {value: Number, unit: String},
-	fiber: {value: Number, unit: String},
+	nutrients: [nutrientSchema],
 	cookingMinutes: Number,
 	preparationMinutes: Number,
 	servingSize: Number,

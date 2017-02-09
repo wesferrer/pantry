@@ -1,14 +1,27 @@
 <% include ../header %>
 
-hey, this is the recipe index that shows all of a user's favorited recipes
-
-<div class="container-fluid random-recipes">
-  <ul id="favorites">
+<div class="container-fluid fav-recipes">
+  <div id="favorites">
     <% recipes.forEach(function(f) { %>
-      <li><h4><a href="/recipes/<%= f.id %>"><%= f.title %></a>&nbsp;<button class="btn btn-xs btn-danger" data-id="<%= f.id %>">X</button></h4></li>
+      <div class="col-lg-3 col-sm-6 portfolio-item" id="one-recipe">
+        <div class="portfolio-hover">
+          <div class="portfolio-hover-content">
+            <i class="fa fa-plus fa-3x"></i>
+          </div>
+        </div>
+        <div class="recipe-image-cropper">
+          <img src ="<%= f.imageUrl %>" class="img-responsive" size="40x40">
+        </div>
+        <div class="portfolio-caption">
+          <h4><button class="glyphicon glyphicon-remove" data-id="<%= f.id %>"></button><a href="/recipes/<%= f.id %>">&nbsp;&nbsp;&nbsp;<%= f.title %></a></h4>
+          <p class="text-muted">COOK TIME: <%= f.readyInMinutes %></p><br>
+          <p class="text-muted"><strong>Ingredients: </strong>
+            <%= f.ingredients.map(ing => ing.name).join(', ') %>
+          </p>
+        </div>
+      </div>
     <% }) %>
-  </ul>
-</div>
+  </div>
 
 <script>
   $('#favorites').on('click', 'button', function(evt) {
@@ -17,6 +30,6 @@ hey, this is the recipe index that shows all of a user's favorited recipes
       url: '/recipes/' + $(this).attr('data-id') + '/fav',
       method: 'DELETE'
     });
-    $(this).closest('li').remove();
+    $(this).closest('#one-recipe').remove();
   })
 </script>

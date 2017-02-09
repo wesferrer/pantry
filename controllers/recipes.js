@@ -90,8 +90,9 @@ function addRecipeToDb (recipeApiId) {
         directions: recipeData.instructions,
         cookingMinutes: recipeData.cookingMinutes,
         preparationMinutes: recipeData.preparationMinutes,
+        readyInMinutes: recipeData.readyInMinutes,
         servingSize: recipeData.servings,
-        imageUrl: recipeData.image//,
+        imageUrl: recipeData.image
       });
       recipeData.extendedIngredients.forEach(function(ing) {
         newRecipe.ingredients.push({

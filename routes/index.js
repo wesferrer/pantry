@@ -55,6 +55,22 @@ router.post('/searchi', function(req, res, next) {
  });
 });
 
+//complex search
+router.post('/searchc', function(req, res, next) {
+ var options = {
+   url: rootURL + '/recipes/searchComplex?query=' + req.body.main + '&includeIngredients=' + req.body.ingredient1 + '%2C+' + req.body.ingredient2 + '%2C+' + req.body.ingredient3 + '&excludeIngredients=' + req.body.allergy1 + '%2C+' + req.body.allergy2 + '%2C+' + req.body.allergy3 + '&instructionsRequired=true&&fillIngredients=true&limitLicense=false&number=5&offset=0&ranking=1',
+   headers: {
+     'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
+     'Accept': 'application/json'
+   }
+ };
+ request(options, function(err, response, body) {
+   var complexData = JSON.parse(body);
+   console.log(options);
+   console.log(complexData);
+   res.render('search-results', {user: req.user, recipes: complexData.results});
+ });
+});
 
 router.get('/auth/google', passport.authenticate(
   'google',

@@ -6,7 +6,7 @@ const rootURL = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com';
 module.exports = {
   show: show,
   addFav: addFav,
-  index: index
+  index: index,
 };
 
 function index(req, res, next) {
@@ -105,3 +105,17 @@ function addRecipeToDb (recipeApiId) {
   });
 }
 
+// function newComment(req, res, next) {
+//     res.render('recipes/comments');
+// }
+
+// function createComment(req, res, next) {
+//  var content = req.body.content;
+//  Recipe.findById(req.params.id, function(err, beer) {
+//    recipe.comments.push({content});
+//    recipe.save(function (err, d) {
+//      if (err) return res.render('/');
+//       res.redirect('/recipes/' + req.params.id);
+//     });
+//  });
+// };

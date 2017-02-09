@@ -35,7 +35,7 @@ var recipeSchema = new Schema({
 	preparationMinutes: Number,
 	servingSize: Number,
 	imageUrl: String,
-	review: [reviewSchema]
+	reviews: [reviewSchema]
 });
 
 module.exports = mongoose.model('Recipe', recipeSchema);

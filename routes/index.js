@@ -55,6 +55,36 @@ router.post('/searchi', function(req, res, next) {
  });
 });
 
+//complex search
+router.post('/searchc', function(req, res, next) {
+  //var z = req.user;
+  //console.log(z);
+ var options = {
+   url: rootURL + '/recipes/searchComplex?query=' + req.body.main + '&includeIngredients=' + req.body.ingredient1 + '%2C+' + req.body.ingredient2 + '%2C+' + req.body.ingredient3 + '&excludeIngredients=' + req.body.allergy1 + '%2C+' + req.body.allergy2 + '%2C+' + req.body.allergy3 + '&instructionsRequired=true&&fillIngredients=true&limitLicense=false&number=5&offset=0&ranking=1',
+   headers: {
+     'X-Mashape-Key': process.env.SPOONACULAR_TOKEN,
+     'Accept': 'application/json'
+   }
+ };
+ request(options, function(err, response, body) {
+   var complexData = JSON.parse(body);
+   var main = req.body.main;
+   var ingred1 = req.body.ingredient1;
+   var ingred2 = req.body.ingredient2;
+   var ingred3 = req.body.ingredient3;
+   var aller1 = req.body.allergy1;
+   var aller2 = req.body.allergy2;
+   var aller3 = req.body.allergy3;
+   // var p = req.user;
+   // var e = p.restrictions;
+   // var mystring = e.toString();
+   // var o = mystring.replace(/,/g , "&2C");
+   // console.log(options);
+   // console.log(complexData);
+   // console.log(o);
+   res.render('search-results', {user: req.user, recipes: complexData.results, main, ingred1, ingred2, ingred3, aller1, aller2, aller3});
+ });
+});
 
 router.get('/auth/google', passport.authenticate(
   'google',

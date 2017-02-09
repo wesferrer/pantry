@@ -1,4 +1,23 @@
-<%# include ../header %>
+<% include ../header %>
 
-		Show recipe
-		<%= recipe %>
+<div class="container-fluid">
+	<div class="recipe-image-cropper">
+		<img src="<%= recipe.imageUrl %>" class="img-responsive">
+	</div>
+	<h2><%= recipe.title.toUpperCase() %></h2>
+	<p>Preparation Time: <%= recipe.preparationMinutes %><br>
+	Cook Time: <%= recipe.cookingMinutes %><br>
+	Seving Size: <%= recipe.servingSize %><br>
+	<h3>Directions: </h3><%= recipe.directions %><br>
+	<h3>Ingredients: </h3><br>
+	<% recipe.ingredients.forEach(function(ing) { %>
+		<li><%= ing.name %> - <%= ing.amount %> <%= ing.unit %></li><br>
+	<% }) %>
+	<h3>Nutrients: </h3><br>
+	<%- recipe.nutrients
+		.filter(nut => 'Calories|Fat|Sugar|Sodium|Protein|Carbohydrates|Cholesterol'.includes(nut.title))
+		.map(nut => nut.title + ": " + nut.amount + " " + nut.unit + "<br>")
+		.join('') %>
+
+	</p>
+</div>

@@ -11,7 +11,7 @@ module.exports = {
 
 function index(req, res, next) {
   getPopulatedUser(req.user._id)
-  .then(user => res.render('recipes/index', {recipes: user.favorites}));
+  .then(user => res.render('recipes/index', {user: req.user, recipes: user.favorites}));
 }
 
 
@@ -24,7 +24,7 @@ function show(req, res, next) {
     } else {
       addRecipeToDb(req.params.recipeId)
       .then(function(recipe) {
-        res.render('recipes/show', {recipe});
+        res.render('recipes/show', {user: req.user, recipe});
       });
     }
 	})
@@ -38,11 +38,11 @@ function addFav(req, res, next) {
         console.log(recipe._id)
         req.user.save(function(err) {
           getPopulatedUser(req.user._id)
-          .then(user => res.render('recipes/index', {recipes: user.favorites}));
+          .then(user => res.render('recipes/index', {user: req.user, recipes: user.favorites}));
         });
       } else {
         getPopulatedUser(req.user._id)
-        .then(user => res.render('recipes/index', {recipes: user.favorites}));
+        .then(user => res.render('recipes/index', {user: req.user, recipes: user.favorites}));
       } ;
     } else {
     addRecipeToDb(req.params.recipeId)
@@ -50,7 +50,7 @@ function addFav(req, res, next) {
       req.user.favorites.push(recipe._id);
       req.user.save(function(err) {
         getPopulatedUser(req.user._id)
-        .then(user => res.render('recipes/index', {recipes: user.favorites}));
+        .then(user => res.render('recipes/index', {user: req.user, recipes: user.favorites}));
       });
     });
     }
@@ -65,6 +65,8 @@ function getPopulatedUser(userId) {
 };
 
 function addRecipeToDb (recipeApiId) {
+  var nutTitle, amount, unit;
+  var nutArr = [];
   var options = {
     url: rootURL +'/recipes/' + recipeApiId + '/information?includeNutrition=true',
     headers: {
@@ -75,27 +77,27 @@ function addRecipeToDb (recipeApiId) {
   return new Promise(function(resolve, reject) {
     request.get(options, function(err, response, body) {
       var recipeData = JSON.parse(body);
-      var newRecipe = new Recipe({
+       var newRecipe = new Recipe({
         title: recipeData.title,
         recipeId: recipeData.id,
         directions: recipeData.instructions,
-        // calories: recipeData.nutrition.nutrients,
-      // sodium:
-            // fat:
-            // protein:
-            // carbs:
-            // fiber:
         cookingMinutes: recipeData.cookingMinutes,
         preparationMinutes: recipeData.preparationMinutes,
         servingSize: recipeData.servings,
-        imageUrl: recipeData.image
-            // review:
+        imageUrl: recipeData.image//,
       });
       recipeData.extendedIngredients.forEach(function(ing) {
         newRecipe.ingredients.push({
           name: ing.name,
           amount: ing.amount,
           unit: ing.unit
+        });
+      });
+      recipeData.nutrition.nutrients.forEach(function(nut) {
+        newRecipe.nutrients.push({
+          title: nut.title, 
+          amount: nut.amount,
+          unit: nut.unit
         });
       });
       resolve(newRecipe);

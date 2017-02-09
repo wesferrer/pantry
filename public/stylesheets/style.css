@@ -7,7 +7,7 @@ a {
   color: #00B7FF;
 }
 button.btn.btn-default {
-  margin-bottom: 17px;
+  /*margin-bottom: 17px;*/
 }
 
 a.btn.btn-default.navbar-btn {
@@ -71,12 +71,20 @@ button.btn.btn-default {
   color: white;
 }
 
+a.btn.btn-default {
+  padding: 14px 25px;
+  background-color: #3b9792;
+  border-color: transparent;
+  color: white;
+}
+
 #front-jumbo{
   background-image: url('http://i.imgur.com/fYl40wj.png');
 
   background-size: cover;
   height: 500px;
   color: white;
+  padding-top: 20px;
 }
 
 div.col-lg-3.col-sm-6.portfolio-item {
@@ -98,7 +106,7 @@ div.img.img-responsive {
 }
 
 #jumbo-search {
-  margin-top: 125px;
+  margin-top: 60px;
 }
 
 #dropdownMenu1 {
@@ -162,7 +170,7 @@ div.ingr {
 div.col-md-8.right-column {
   padding-left: 40px;
   padding-bottom: 40px;
-  padding-top: 
+  padding-top:
 }
 
 .recipe-image-cropper img {
@@ -203,4 +211,8 @@ div.glyphicon.glyphicon-heart {
   margin-right: 20px;
   margin-left: 20px;
   margin-top: 10px;
+}
+
+#pantrybutton {
+  margin-top: 20px;
 }

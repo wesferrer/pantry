@@ -1,8 +1,22 @@
 <% include ../header %>
 
 hey, this is the recipe index that shows all of a user's favorited recipes
+
 <div class="container-fluid random-recipes">
-    <% recipes.forEach(recipe => { %>
-          <h4><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></h4>
+  <ul id="favorites">
+    <% recipes.forEach(function(f) { %>
+      <li><h4><a href="/recipes/<%= f.id %>"><%= f.title %></a>&nbsp;<button class="btn btn-xs btn-danger" data-id="<%= f.id %>">X</button></h4></li>
     <% }) %>
+  </ul>
 </div>
+
+<script>
+  $('#favorites').on('click', 'button', function(evt) {
+    console.log($(this).attr('data-id'));
+    $.ajax({
+      url: '/recipes/' + $(this).attr('data-id') + '/fav',
+      method: 'DELETE'
+    });
+    $(this).closest('li').remove();
+  })
+</script>

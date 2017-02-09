@@ -6,13 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+button.btn.btn-default {
+  margin-bottom: 17px;
+}
 
 a.btn.btn-default.navbar-btn {
   margin-right: 30px;
-  margin-top: 20px;
+  margin-top: 14px;
   background-color: #3b9792;
   color: white;
   border-color: transparent;
+  line-height: 10px;
 }
 
 .dropdown {
@@ -26,6 +30,11 @@ a.btn.btn-default.navbar-btn:hover {
   border-color: transparent;
 }
 
+nav.navbar.navbar-default.navbar-fixed-top {
+  height: 70px;
+}
+
+
 nav.navbar.navbar-inverse.navbar-fixed-top {
   z-index: 1;
 }
@@ -35,8 +44,8 @@ ul.nav.navbar-nav.navbar-right {
 }
 
 #logo-img{
-  height: 75px;
-  width: 75px;
+  height: 55px;
+  width: 55px;
 }
 
 #logo-div {
@@ -71,26 +80,13 @@ button.btn.btn-default {
 }
 
 div.col-lg-3.col-sm-6.portfolio-item {
-  /*border: solid black 2px;*/
   height: 600px;
   text-align: center;
 }
 
 div.col-lg-4.col-xs-6.portfolio-item {
-  /*border: solid black 2px;*/
   height: 600px;
   text-align: center;
-}
-
-.recipe-image-cropper img {
-  vertical-align: middle;
-  height: 60%;
-  min-width: 100%;
-  left: 50%;
-  overflow: hidden;
-  position: relative;
-  object-fit: cover;
-  transform: translateX(-50%);
 }
 
 div.img.img-responsive {
@@ -106,24 +102,105 @@ div.img.img-responsive {
 }
 
 #dropdownMenu1 {
-  height: 80px;
-  width: 80px;
+  height: 55px;
+  width: 55px;
   border: 1px black solid;
   border-radius: 50%;
 }
 
 #profile-img {
-  height: 75px;
-  width: 75px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
 }
 
 .navbar.navbar-inverse {
-  margin-top: 96px;
+  margin-top: 70px;
   border-radius: 0;
 }
 
 .container-fluid.search-content {
   margin-top: 150px;
   z-index: 0;
+}
+
+div.container-fluid.recipe-show {
+  margin-top: 70px;
+}
+
+div.direction {
+  line-height: 30px;
+  pointer-events: none;
+}
+
+div.minutes {
+  height: 130px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+div.recipe-circle {
+  border-radius: 50%;
+  background: darkgrey;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  height: 100px;
+  width: 100px;
+  line-height: 20px;
+  padding-top: 35px;
+  float: left;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+div.ingr {
+  clear: left;
+  /*padding-top: 20px;*/
+}
+
+div.col-md-8.right-column {
+  padding-left: 40px;
+  padding-bottom: 40px;
+  padding-top: 
+}
+
+.recipe-image-cropper img {
+  vertical-align: middle;
+  height: 60%;
+  min-width: 100%;
+  left: 50%;
+  overflow: hidden;
+  position: relative;
+  object-fit: cover;
+  transform: translateX(-50%);
+}
+
+.recipe-show-image-cropper {
+  height: 400px;
+  overflow: hidden;
+  border-radius: 5%;
+  border: lightgrey 3px;
+  object-fit: cover;
+}
+
+.recipe-show-image-cropper img {
+  vertical-align: middle;
+  height: 100%;
+  /*min-width: 100%;*/
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+}
+
+h2.recipe-show-title {
+  color: #569490;
+}
+
+div.glyphicon.glyphicon-heart {
+  font-size: 75px;
+  color: pink;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-top: 10px;
 }

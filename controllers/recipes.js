@@ -7,13 +7,13 @@ module.exports = {
   show: show,
   addFav: addFav,
   index: index,
+  removeFav: removeFav
 };
 
 function index(req, res, next) {
   getPopulatedUser(req.user._id)
   .then(user => res.render('recipes/index', {user: req.user, recipes: user.favorites}));
 }
-
 
 function show(req, res, next) {
 	var query = (req.params.recipeId.length < 24) ?
@@ -57,9 +57,14 @@ function addFav(req, res, next) {
   });
 }
 
+function removeFav(req, res, next) {
+  req.user.favorites.splice(req.user.favorites.indexOf(req.params.id), 1);
+  req.user.save(function(err) {
+    res.json({msg: 'Deleted favorite'});
+  })
+}
 
 // helper functions
-
 function getPopulatedUser(userId) {
   return User.findById(userId).populate('favorites').exec();
 };
@@ -95,7 +100,7 @@ function addRecipeToDb (recipeApiId) {
       });
       recipeData.nutrition.nutrients.forEach(function(nut) {
         newRecipe.nutrients.push({
-          title: nut.title, 
+          title: nut.title,
           amount: nut.amount,
           unit: nut.unit
         });

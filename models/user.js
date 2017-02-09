@@ -11,7 +11,7 @@ var userSchema = new Schema({
 	name: String,
 	email: String,
 	favorites: [{type: Schema.Types.ObjectId, ref: 'Recipe'}],
-	pantry: [{type: Schema.Types.ObjectId, ref: 'Ingredient'}],
+	pantry: [String],
 	restrictions: [String],
 	shoppingList: [shoppingSchema],
   googleId: String

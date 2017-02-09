@@ -1,23 +1,46 @@
 <% include ../header %>
 
-<div class="container-fluid">
-	<div class="recipe-image-cropper">
-		<img src="<%= recipe.imageUrl %>" class="img-responsive">
-	</div>
-	<h2><%= recipe.title.toUpperCase() %></h2>
-	<p>Preparation Time: <%= recipe.preparationMinutes %><br>
-	Cook Time: <%= recipe.cookingMinutes %><br>
-	Seving Size: <%= recipe.servingSize %><br>
-	<h3>Directions: </h3><%= recipe.directions %><br>
-	<h3>Ingredients: </h3><br>
-	<% recipe.ingredients.forEach(function(ing) { %>
-		<li><%= ing.name %> - <%= ing.amount %> <%= ing.unit %></li><br>
-	<% }) %>
-	<h3>Nutrients: </h3><br>
-	<%- recipe.nutrients
-		.filter(nut => 'Calories|Fat|Sugar|Sodium|Protein|Carbohydrates|Cholesterol'.includes(nut.title))
-		.map(nut => nut.title + ": " + nut.amount + " " + nut.unit + "<br>")
-		.join('') %>
+<div class="container-fluid recipe-show">
+	<div class="container profile-info">
+		<div class="col-md-4 recipe-show-image-cropper">
+			<img src="<%= recipe.imageUrl %>" class="img-responsive recipe-show-image-cropper">
+		</div>
+		<div class="col-md-8 right-column">
+			<h2 class="recipe-show-title"><%= recipe.title.toUpperCase() %></h2>
+			<div class="minutes">
+				<div class="recipe-circle">
+					PREP MIN:<br>
+					<%= recipe.preparationMinutes %>
+				</div>
+				<div class="recipe-circle">
+					COOK MIN:<br>
+					<%= recipe.cookingMinutes %>
+				</div>
+				<div class="recipe-circle">
+					SERVES:<br>
+					<%= recipe.servingSize %>
+				</div>
+				<% if (user) { %>
+          <a href="/recipes/<%= recipe.recipeId %>/fav"><div class="glyphicon glyphicon-heart" size="100x100"></div></a>
+				<% } %>
+			</div>
 
-	</p>
+
+			
+			<div class="ingr"><h3>INGREDIENTS: </h3><br>
+				<% recipe.ingredients.forEach(function(ing) { %>
+					<li><strong><%= ing.name.toUpperCase() %></strong> - <%= ing.amount.toFixed(2) %> <%= ing.unit %></li><br>
+				<% }) %>
+			</div>
+			<!-- </p> -->
+		</div>
+		<!-- <div class="row"> -->
+			<div class="direction"><h3>DIRECTIONS: </h3><%- recipe.directions %></div><br>
+			<h3>NUTRIENTS: </h3><br>
+			<p><%- recipe.nutrients
+				.filter(nut => 'Calories|Fat|Sugar|Sodium|Protein|Carbohydrates|Cholesterol'.includes(nut.title))
+				.map(nut => "<li><strong>" + nut.title + ": </strong>" + nut.amount + " " + nut.unit + "</li><br>")
+				.join('') %></p>
+		<!-- </div> -->
+	</div>
 </div>

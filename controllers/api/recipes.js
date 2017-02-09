@@ -1,6 +1,5 @@
 var Recipe = require('../../models/recipe');
 
-
 module.exports = {
   getAllRecipes,
   getOneRecipe

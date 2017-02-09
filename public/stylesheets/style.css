@@ -27,7 +27,7 @@ a.btn.btn-default.navbar-btn:hover {
 }
 
 nav.navbar.navbar-inverse.navbar-fixed-top {
-  z-index: 0;
+  z-index: 1;
 }
 
 ul.nav.navbar-nav.navbar-right {
@@ -63,7 +63,7 @@ button.btn.btn-default {
 }
 
 #front-jumbo{
-  background-image: url('http://i.imgur.com/E5Pf77P.jpg');
+  background-image: url('http://i.imgur.com/fYl40wj.png');
 
   background-size: cover;
   height: 500px;
@@ -81,7 +81,6 @@ div.col-lg-4.col-xs-6.portfolio-item {
   height: 600px;
   text-align: center;
 }
-
 
 .recipe-image-cropper img {
   vertical-align: middle;
@@ -126,4 +125,5 @@ div.img.img-responsive {
 
 .container-fluid.search-content {
   margin-top: 150px;
+  z-index: 0;
 }

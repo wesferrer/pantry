@@ -34,7 +34,6 @@ nav.navbar.navbar-default.navbar-fixed-top {
   height: 70px;
 }
 
-
 nav.navbar.navbar-inverse.navbar-fixed-top {
   z-index: 1;
 }
@@ -43,7 +42,7 @@ ul.nav.navbar-nav.navbar-right {
   height: 85px;
 }
 
-#logo-img{
+#logo-img {
   height: 55px;
   width: 55px;
 }
@@ -78,9 +77,8 @@ a.btn.btn-default {
   color: white;
 }
 
-#front-jumbo{
+#front-jumbo {
   background-image: url('http://i.imgur.com/fYl40wj.png');
-
   background-size: cover;
   height: 500px;
   color: white;
@@ -108,6 +106,7 @@ div.img.img-responsive {
 #jumbo-search {
   margin-top: 60px;
 }
+
 
 #dropdownMenu1 {
   height: 55px;
@@ -164,7 +163,6 @@ div.recipe-circle {
 
 div.ingr {
   clear: left;
-  /*padding-top: 20px;*/
 }
 
 div.col-md-8.right-column {
@@ -195,7 +193,6 @@ div.col-md-8.right-column {
 .recipe-show-image-cropper img {
   vertical-align: middle;
   height: 100%;
-  /*min-width: 100%;*/
   left: 50%;
   position: relative;
   transform: translateX(-50%);
@@ -215,4 +212,15 @@ div.glyphicon.glyphicon-heart {
 
 #pantrybutton {
   margin-top: 20px;
+}
+
+button.glyphicon.glyphicon-remove {
+  font-size: 20px;
+  background-color: white;
+  border-color: white;
+  color: darkgrey;
+}
+
+div.container-fluid.fav-recipes {
+  padding-top: 30px;
 }

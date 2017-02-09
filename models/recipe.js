@@ -23,7 +23,7 @@ var nutrientSchema = new Schema ({
 	title: String,
 	amount: Number,
 	unit: String
-})
+});
 
 var recipeSchema = new Schema({
   title: String,
@@ -33,9 +33,10 @@ var recipeSchema = new Schema({
 	nutrients: [nutrientSchema],
 	cookingMinutes: Number,
 	preparationMinutes: Number,
+	readyInMinutes: Number,
 	servingSize: Number,
 	imageUrl: String,
-	review: [reviewSchema]
+	reviews: [reviewSchema]
 });
 
 module.exports = mongoose.model('Recipe', recipeSchema);

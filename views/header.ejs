@@ -33,6 +33,7 @@
             <img src="http://i.imgur.com/Vy7xAMp.png" alt="default profile picture" id="profile-img">
           </div>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="/recipes">My Favorites</a></li>
             <li><a href="/users/<%= user.id %>/">View Profile</a></li>
             <li><a href="/logout">Log Out</a></li>
           </ul>
@@ -44,13 +45,3 @@
      </div><!-- /.navbar-collapse -->
    </div>
  </nav>
-
- <% if (user) { %>
- <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <ul class="nav navbar-nav">
-      <li style="margin-left: 400px; margin-right: 100px"><a href="#">My Pantry</a></li>
-      <li style="margin-right: 50px"><a href="/recipes">Favorite Recipes</a></li>
-  </div>
-</nav>
-<% } %>

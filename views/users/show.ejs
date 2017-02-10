@@ -14,12 +14,12 @@
       <div class ="row col-lg-6" style="padding-top: 25px; margin-left: 0;">
         <form action="/users/<%= user.id %>/pantry/new?_method=PUT" method="post">
           <label>Add Ingredients to your Pantry:
-            <input type="text" name="pantry">
+            <input type="text" pattern="[A-Za-z]+" name="pantry">
           </label>
           <input class="btn btn-default" type="submit" value="Save">
         </form>
 
-          <div class="panel panel-info" id="userPantry">
+          <div class="panel panel-info" id="pantry">
             <div class="panel-heading">
               <h3 class="panel-title">Your Pantry</h3>
             </div>
@@ -41,7 +41,7 @@
 
         <form action="/users/<%= user.id %>/restrictions/new?_method=PUT" method="post">
           <label>Add Restrictions:
-            <input type="text" name="restrictions">
+            <input type="text" pattern="[A-Za-z]+" name="restrictions">
           </label>
           <input class="btn btn-default" type="submit" value="Save">
         </form>
@@ -82,7 +82,7 @@
 
 
   <script>
-    $('#userPantry').on('click', 'button', function(evt) {
+    $('#pantry').on('click', 'button', function(evt) {
       console.log($(this).attr('data-id'));
       $.ajax({
         url: '/users/pantry/' + $(this).attr('data-id'),

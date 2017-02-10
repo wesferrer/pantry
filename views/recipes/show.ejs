@@ -47,6 +47,7 @@
 		<% }); %>
 	</ul>
 
+<% if (user) {%>
 	<form method="POST" action="/recipes/<%= recipe._id %>/reviews">
 		<textarea name="comment" id="" cols="30" rows="10"></textarea>
 		<div class="input-group">
@@ -62,3 +63,6 @@
 		<input type="submit" value="Add Review" class="btn btn-success">
 	</form>
 </div>
+<% } %>
+
+<% include ./footer %>

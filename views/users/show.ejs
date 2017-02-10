@@ -1,18 +1,17 @@
 <% include ../header %>
 
   <div class="jumbotron" id="profile-jumbo">
-    <div class="container">
-      <div class="container-fluid">
-        <div>
-          <h2><div class="text-center"><%= user.name %></div></h2>
-          <div class="text-center"><%= user.email %></div>
-        </div>
-        <form action="/searchp" method="POST" class="navbar-form text-center" id="jumbo-search-profile">
-          <button id="pantrybutton" type="submit" class="btn btn-default">Search Recipes!</button>
-        </form>
-
-        <div class ="row col-lg-6" style="padding-top: 25px; margin-left: 0;">
-
+    <div>
+      <h2><div class="text-center"><%= user.name %></div></h2>
+      <div class="text-center"><%= user.email %></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="container-fluid">
+      <form action="/searchp" method="POST" class="navbar-form text-center" id="jumbo-search-profile">
+        <button id="pantrybutton" type="submit" class="btn btn-default">Search Recipes!</button>
+      </form>
+      <div class ="row col-lg-6" style="padding-top: 25px; margin-left: 0;">
         <form action="/users/<%= user.id %>/pantry/new?_method=PUT" method="post">
           <label>Add Ingredients to your Pantry:
             <input type="text" name="pantry">
@@ -67,7 +66,8 @@
 
       </div>
     </div>
-  </div>
+  <% include ../footer %>
+
 
   <script>
     $('#restrictions').on('click', 'button', function(evt) {
@@ -92,4 +92,3 @@
     })
   </script>
 
-<% include ../footer %>

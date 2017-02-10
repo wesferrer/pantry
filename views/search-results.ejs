@@ -2,6 +2,11 @@
 
 <div class="container-fluid search-content">
   <div class="col-sm-3 col-xs-6 sidebar-pantry">
+  <% if (user) { %>
+    <a href="/users/<%= user.id %>/" class="btn btn-default" id="update-pantry-button">Update Pantry</a>
+  <% } %>
+  <br>
+  <br>
   You searched for: <br><br>
     <strong>Recipe Name:</strong>
     <%= main %><br>

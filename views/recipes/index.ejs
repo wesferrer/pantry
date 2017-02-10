@@ -26,7 +26,9 @@
       <h2 class="text-center">Oopsie, looks like you don't have any favorites saved!</h2>
     <% } %>
   </div>
+</div>
 
+<% include ../footer %>
 <script>
   $('#favorites').on('click', 'button', function(evt) {
     console.log($(this).attr('data-id'));
@@ -38,4 +40,3 @@
   })
 </script>
 
-<% include ../footer %>

@@ -30,7 +30,7 @@
             <% } else { %>
               <% user.pantry.forEach(function(p) { %>
               <div class="panel-body" id="one-pantry">
-                <%= p %> <button class="btn btn-xs btn-danger" data-id="<%= p %>">X</button>
+                <button class="glyphicon glyphicon-remove" data-id="<%= p %>"></button>&nbsp;&nbsp;<%= p %>
               </div>
               <% }) %>
             <% } %>
@@ -57,7 +57,7 @@
             <% } else { %>
               <% user.restrictions.forEach(function(r) { %>
               <div class="panel-body" id="one-restriction">
-                <%= r %> <button class="btn btn-xs btn-danger" data-id="<%= r %>">X</button>
+                <button class="glyphicon glyphicon-remove" data-id="<%= r %>"></button>&nbsp;&nbsp;<%= r %>
               </div>
             <% }) %>
           <% } %>

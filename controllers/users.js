@@ -26,7 +26,7 @@ function edit(req, res, next) {
 function addRestrictions(req, res, next) {
   req.user.restrictions.push(req.body.restrictions);
   req.user.save(function(err) {
-    res.redirect('/users/' + req.user.id + '/edit');
+    res.redirect('/users/' + req.user.id);
   });
 }
 
@@ -40,7 +40,7 @@ function removeRestrictions(req, res, next) {
 function addPantry(req, res, next) {
   req.user.pantry.push(req.body.pantry);
   req.user.save(function(err) {
-    res.redirect('/users/' + req.user.id + '/edit');
+    res.redirect('/users/' + req.user.id);
   });
 }
 

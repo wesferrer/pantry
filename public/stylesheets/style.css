@@ -85,6 +85,11 @@ a.btn.btn-default {
   padding-top: 20px;
 }
 
+#profile-jumbo {
+  height: 145px;
+  padding-top: 20px;
+}
+
 div.col-lg-3.col-sm-6.portfolio-item {
   height: 600px;
   text-align: center;
@@ -107,6 +112,9 @@ div.img.img-responsive {
   margin-top: 60px;
 }
 
+#jumbo-search-profile {
+  margin-top: 40px;
+}
 
 #dropdownMenu1 {
   height: 55px;
@@ -127,7 +135,7 @@ div.img.img-responsive {
 }
 
 .container-fluid.search-content {
-  margin-top: 150px;
+  margin-top: 60px;
   z-index: 0;
 }
 

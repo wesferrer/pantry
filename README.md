@@ -41,10 +41,13 @@ To start using the application, click Heroku link below, log in with your Google
 ## Next Steps
 
 In the v2 of the application, the following features will be added:
-1. Allow users to filter search results and search based on cooking method (grill, steam, boil).
-2. Allow users to recalculate ingredients based on the serving size.
-3. Allow users to create a grocery list based on missing ingredients.
-4. Suggest alternative ingredients that user can use to substitude missing ingredients.
+
+- Allow users to filter search results and search based on cooking method (grill, steam, boil).
+- Allow users to recalculate ingredients based on the serving size.
+- Allow users to create a grocery list based on missing ingredients.
+- Suggest alternative ingredients that user can use to substitude missing ingredients.
+- Search Autocomplete - Predicting what the user is typing. Also helps with any misspelling, which returns an empty search. 
+- Search by most popular - Being able to filter recipes results based on the ratings
 
 ## Major Hurdles
 We encountered some hurdles during our production time with Pantry in the form of:
@@ -56,6 +59,3 @@ We encountered some hurdles during our production time with Pantry in the form o
 ##Unsolved Issues
 > * **Inconsistent API** - Different parts of the API produced different results when it came to producing images for the search results, making it hard to be able to do consistently display images depending on search.
 
-##Future Updates
-> * **Search Autocomplete** - Predicting what the user is typing. Also helps with any misspelling, which returns an empty search. 
-> * **Search by most popular** - Being able to filter recipes results based on the ratings

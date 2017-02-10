@@ -8,6 +8,7 @@ router.get('/', isLoggedIn, recipesCtrl.index);
 router.delete('/:id/fav', isLoggedIn, recipesCtrl.removeFav);
 router.get('/:id/reviews/new', recipesCtrl.newReview);
 router.post('/:id/reviews', recipesCtrl.createReview);
+router.delete('/:recId/reviews/:revId', recipesCtrl.deleteReview);
 
 function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();

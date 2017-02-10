@@ -232,3 +232,9 @@ button.glyphicon.glyphicon-remove {
 div.container-fluid.fav-recipes {
   padding-top: 30px;
 }
+
+div.container-fluid.about-app {
+  width: 600px;
+  text-align: center;
+  font-size: 18px;
+}

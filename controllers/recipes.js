@@ -9,7 +9,8 @@ module.exports = {
   index: index,
   removeFav: removeFav,
   createReview: createReview,
-  newReview: newReview
+  newReview: newReview,
+  deleteReview: deleteReview
 };
 
 function index(req, res, next) {
@@ -20,7 +21,7 @@ function index(req, res, next) {
 function show(req, res, next) {
 	var query = (req.params.recipeId.length < 24) ?
 		{recipeId: req.params.recipeId} : {_id: req.params.recipeId};
-	Recipe.findOne(query, function (err, recipe) {
+	Recipe.findOne(query).populate('reviews.reviewer').exec(function (err, recipe) {
     if(recipe) {
   		res.render('recipes/show', {user: req.user, recipe});
     } else {
@@ -64,6 +65,15 @@ function removeFav(req, res, next) {
   req.user.save(function(err) {
     res.json({msg: 'Deleted favorite'});
   })
+}
+
+function deleteReview(req, res) {
+  Recipe.findById(req.params.recId, function(err, recipe) { 
+    recipe.reviews.splice(recipe.reviews.indexOf(req.params.revId), 1);
+    recipe.save(function (err, d) {
+      res.json({msg: 'Deleted review'});
+    });
+ });
 }
 
 // helper functions
@@ -120,12 +130,11 @@ function newReview(req, res, next) {
 }
 
 function createReview(req, res, next) {
-  console.log("hey from hereeeeeeeeee");
  Recipe.findById(req.params.id, function(err, recipe) {
-   recipe.reviews.push(req.body);
-   recipe.reviewer = req.user.name;
-   recipe.save(function (err, d) {
-     if (err) return res.render('/');
+  req.body.reviewer = req.user._id;
+  recipe.reviews.push(req.body);
+  recipe.save(function (err, d) {
+    if (err) return res.render('/');
       res.redirect('/recipes/' + req.params.id);
     });
  });

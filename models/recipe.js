@@ -16,7 +16,7 @@ var reviewSchema = new Schema ({
 		min: 1,
     max: 5
 	},
-	reviewer: [{type: Schema.Types.ObjectId, ref: 'User'}]
+	reviewer: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 var nutrientSchema = new Schema ({

@@ -21,10 +21,11 @@
 					<%= recipe.servingSize %>
 				</div>
 				<% if (user) { %>
-          <a href="/recipes/<%= recipe.recipeId %>/fav"><div class="glyphicon glyphicon-heart" size="100x100"></div></a>
+					<% if (!user.favorites.some(fav => fav.equals(recipe._id))) { %>
+	          <a href="/recipes/<%= recipe.recipeId %>/fav"><div class="glyphicon glyphicon-heart" size="100x100"></div></a>
+          <% } %>
 				<% } %>
 			</div>
-
 			<div class="ingr"><h3>INGREDIENTS: </h3><br>
 				<% recipe.ingredients.forEach(function(ing) { %>
 					<li><strong><%= ing.name.toUpperCase() %></strong> - <%= ing.amount.toFixed(2) %> <%= ing.unit %></li><br>
@@ -40,29 +41,45 @@
 	</div>
 
 	<h3>Review:</h3>
-	<ul>
+	<div id="reviews">
 		<% recipe.reviews.forEach(function(rev) { %>
-			<li><%= rev.comment %> | rating: <%= rev.rating %></li>
-			<%= rev.reviewer%>
+			<li>
+				<%= rev.comment %> | rating: <%= rev.rating %>
+				<%= rev.reviewer.name %>
+				<% if (user && rev.reviewer._id.equals(user._id)) { %>
+					<h4><button class="glyphicon glyphicon-remove" data-id="<%= rev._id %>"></button></h4>
+				<% } %>
+			</li>
 		<% }); %>
-	</ul>
+	</div>
 
-<% if (user) {%>
-	<form method="POST" action="/recipes/<%= recipe._id %>/reviews">
-		<textarea name="comment" id="" cols="30" rows="10"></textarea>
-		<div class="input-group">
-			<label for="rating">Rating: </label>
-			<select name="rating" id="rating" class="form-control">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</select>
-		</div>
-		<input type="submit" value="Add Review" class="btn btn-success">
-	</form>
+	<script>
+	  $('#reviews').on('click', 'button', function(evt) {
+	    console.log($(this).attr('data-id'));
+	    $.ajax({
+	      url: '/recipes/<%= recipe._id %>/reviews/' + $(this).attr('data-id'),
+	      method: 'DELETE'
+	    });
+	    $(this).closest('li').remove();
+	  });
+	</script>
+
+	<% if(user) {%>
+		<form method="POST" action="/recipes/<%= recipe._id %>/reviews">
+			<textarea name="comment" id="" cols="30" rows="10"></textarea>
+			<div class="input-group">
+				<label for="rating">Rating: </label>
+				<select name="rating" id="rating" class="form-control">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+			<input type="submit" value="Add Review" class="btn btn-success">
+		</form>
+	<% } %>
 </div>
-<% } %>
 
 <% include ../footer %>

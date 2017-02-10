@@ -38,23 +38,36 @@
 			.filter(nut => 'Calories|Fat|Sugar|Sodium|Protein|Carbohydrates|Cholesterol'.includes(nut.title))
 			.map(nut => "<li><strong>" + nut.title + ": </strong>" + nut.amount + " " + nut.unit + "</li><br>")
 			.join('') %></p>
-	</div>
+	</div><br>
 
-	<h3>Review:</h3>
+	<h3>REVIEWS</h3>
 	<% if (!user) { %>
 	Log in to write a review!
 	<% } %>
 	<div id="reviews">
 		<% recipe.reviews.forEach(function(rev) { %>
-			<li>
-				<%= rev.comment %> | rating: <%= rev.rating %>
-				<%= rev.reviewer.name %>
+		<div class="panel panel-default" id="remove">
+			<div class="panel-body">
 				<% if (user && rev.reviewer._id.equals(user._id)) { %>
-					<h4><button class="glyphicon glyphicon-remove" data-id="<%= rev._id %>"></button></h4>
+					<button class="glyphicon glyphicon-remove" data-id="<%= rev._id %>"></button>&nbsp;&nbsp;
 				<% } %>
-			</li>
+				<strong><%= rev.reviewer.name.toUpperCase() %></strong>&nbsp;&nbsp;
+				<%= rev.comment %> &nbsp;&nbsp;|&nbsp;&nbsp;
+				<% if (rev.rating === 1) { %>
+					<div class="glyphicon glyphicon-star"></div>
+				<% } else if (rev.rating === 2) { %>
+					<div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div>
+				<% } else if (rev.rating === 3 ) { %>
+					<div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div>
+				<% } else if (rev.rating === 4) { %>
+					<div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div>
+				<% } else if (rev.rating === 5) { %>
+					<div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div><div class="glyphicon glyphicon-star"></div>
+				<% } %>
+			</div>
+		</div>
 		<% }); %>
-	</div>
+	</div><br>
 
 	<script>
 	  $('#reviews').on('click', 'button', function(evt) {
@@ -63,14 +76,14 @@
 	      url: '/recipes/<%= recipe._id %>/reviews/' + $(this).attr('data-id'),
 	      method: 'DELETE'
 	    });
-	    $(this).closest('li').remove();
+	    $(this).closest('#remove').remove();
 	  });
 	</script>
 
 	<% if(user) {%>
 		<form method="POST" action="/recipes/<%= recipe._id %>/reviews">
 			<textarea name="comment" id="" cols="30" rows="10"></textarea>
-			<div class="input-group">
+			<div class="input-group"><br>
 				<label for="rating">Rating: </label>
 				<select name="rating" id="rating" class="form-control">
 					<option value="1">1</option>
@@ -79,7 +92,7 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select>
-			</div>
+			</div><br>
 			<input type="submit" value="Add Review" class="btn btn-success">
 		</form>
 	<% } %>

@@ -57,6 +57,10 @@
           <p class="text-muted">COOK TIME: <%= recipe.readyInMinutes %> minutes</p><br>
           <p class="text-muted"><strong>Ingredients: </strong>
             <%= recipe.extendedIngredients.map(ing => ing.name).join(', ') %>
+            <br>
+            <% if (user) { %>
+            <a href="/recipes/<%= recipe.id %>/fav">Add to Favs</a>
+            <% } %>
           </p>
         </div>
       </div>

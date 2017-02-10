@@ -45,8 +45,9 @@ function addPantry(req, res, next) {
 }
 
 function removePantry(req, res, next) {
-  req.user.pantry.splice(req.user.pantry.indexOf(req.params.rId), 1);
+  req.user.pantry.splice(req.user.pantry.indexOf(req.params.pId), 1);
   req.user.save(function(err) {
-    res.redirect('/users/' + req.user.id);
+    res.json({msg: 'Deleted pantry item'});
   });
 }
+

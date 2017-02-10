@@ -1,29 +1,97 @@
 <% include ../header %>
 
-  <div class="jumbotron text-center">
+  <div class="jumbotron" id="profile-jumbo">
     <div class="container">
+      <div class="container-fluid">
+        <div>
+          <h2><div class="text-center"><%= user.name %></div></h2>
+          <div class="text-center"><%= user.email %></div>
+        </div>
+        <form action="/searchp" method="POST" class="navbar-form text-center" id="jumbo-search-profile">
+          <button id="pantrybutton" type="submit" class="btn btn-default">Search Recipes!</button>
+        </form>
+
+        <div class ="row col-lg-6" style="padding-top: 25px; margin-left: 0;">
+
+        <form action="/users/<%= user.id %>/pantry/new?_method=PUT" method="post">
+          <label>Add Ingredients to your Pantry:
+            <input type="text" name="pantry">
+          </label>
+          <input class="btn btn-default" type="submit" value="Save">
+        </form>
+
+          <div class="panel panel-info" id="userPantry">
+            <div class="panel-heading">
+              <h3 class="panel-title">Your Pantry</h3>
+            </div>
+            <% if (user.pantry.length === 0) { %>
+              <div class="panel-body" id="one-restriction">
+                You haven't entered any ingredients!
+              </div>
+            <% } else { %>
+              <% user.pantry.forEach(function(p) { %>
+              <div class="panel-body" id="one-pantry">
+                <%= p %> <button class="btn btn-xs btn-danger" data-id="<%= p %>">X</button>
+              </div>
+              <% }) %>
+            <% } %>
+          </div>
+        </div>
+
+        <div class ="row col-lg-6" style="padding-top: 25px; margin-left: 0;">
+
+        <form action="/users/<%= user.id %>/restrictions/new?_method=PUT" method="post">
+          <label>Add Restrictions:
+            <input type="text" name="restrictions">
+          </label>
+          <input class="btn btn-default" type="submit" value="Save">
+        </form>
+
+          <div class="panel panel-danger" id="restrictions">
+            <div class="panel-heading">
+              <h3 class="panel-title">Your Restrictions</h3>
+            </div>
+            <% if (user.restrictions.length === 0) { %>
+              <div class="panel-body" id="one-restriction">
+                You haven't entered any restrictions!
+              </div>
+            <% } else { %>
+              <% user.restrictions.forEach(function(r) { %>
+              <div class="panel-body" id="one-restriction">
+                <%= r %> <button class="btn btn-xs btn-danger" data-id="<%= r %>">X</button>
+              </div>
+            <% }) %>
+          <% } %>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-  <div class="container-fluid">
-        <div class ="row">
-          <div class="text-center"><%= user.name %></div>
-          <div class="text-center"><%= user.email %></div>
-          Restrictions:
-          <ul>
-            <% user.restrictions.forEach(function(r) { %>
-              <li><%= r %></li>
-            <% }) %>
-          </ul>
-          Your Pantry:
-          <ul>
-            <% user.pantry.forEach(function(p) { %>
-              <li><%= p %></li>
-            <% }) %>
-          </ul>
-          <!-- <div class="col s12"><%#= user.pantry %></div> -->
-          <!-- <div class="col s12"><%#= user.grocery %></div> -->
-        </div>
-        <a href="/users/<%= user.id %>/edit">Edit Profile</a>
-  </div>
+
+  <script>
+    $('#restrictions').on('click', 'button', function(evt) {
+      console.log($(this).attr('data-id'));
+      $.ajax({
+        url: '/users/restrictions/' + $(this).attr('data-id'),
+        method: 'DELETE'
+      });
+      $(this).closest('#one-restriction').remove();
+    })
+  </script>
+
+
+  <script>
+    $('#userPantry').on('click', 'button', function(evt) {
+      console.log($(this).attr('data-id'));
+      $.ajax({
+        url: '/users/pantry/' + $(this).attr('data-id'),
+        method: 'DELETE'
+      });
+      $(this).closest('#one-pantry').remove();
+    })
+  </script>
+
+
 </body>
 </html>

@@ -3,29 +3,43 @@
 <div class="container-fluid search-content">
   <div class="col-sm-3 col-xs-6 sidebar-pantry">
   You searched for: <br><br>
-  <strong>Dish:</strong>
-  <%= main %><br>
-  <strong>Ingredients:</strong>
-  <%= ingred1 %>,
-  <%= ingred2 %>,
-  <%= ingred3 %><br>
-  <strong>Restrictions:</strong>
-  <%= aller1 %>,
-  <%= aller2 %>,
-  <%= aller3 %><br><br>
+    <strong>Recipe Name:</strong>
+    <%= main %><br>
+    <strong>Ingredients:</strong>
+    <%= ingred1 %>
+    <% if (ingred1) { %> | <% } %>
+    <%= ingred2 %>
+    <% if (ingred2) { %> | <% } %>
+    <%= ingred3 %>
+    <br>
+    <strong>Restrictions (allergies):</strong>
+    <%= aller1 %>
+    <% if (aller1) { %> | <% } %>
+    <%= aller2 %>
+    <% if (aller2) { %> | <% } %>
+    <%= aller3 %>
+    <br><br>
     <form action="/searchc" method="POST"">
-      <p><input type="text" name="main" class="form-control" placeholder="Dish" value="<%=main%>"></p>
-      <p><input type="text" name="ingredient1" class="form-control" placeholder="First Ingredient..." value="<%=ingred1%>"</p>
-      <p><input type="text" name="ingredient2" class="form-control" placeholder="Second Ingredient..." value="<%=ingred2%>"></p>
-      <p><input type="text" name="ingredient3" class="form-control" placeholder="Third Ingredient..." value="<%=ingred3%>"></p>
-      <p><input type="text" name="allergy1" class="form-control" placeholder="First Allergy..." value="<%=aller1%>"></p>
-      <p><input type="text" name="allergy2" class="form-control" placeholder="Second Allergy..." value="<%=aller2%>"></p>
-      <p><input type="text" name="allergy3" class="form-control" placeholder="Third Allergy..." value="<%=aller3%>"></p>
+      Search by recipe name:
+      <p><input type="text" name="main" class="form-control" placeholder="Chocolate cake" value="<%=main%>"></p>
+      <br>
+      <br>
+      <strong>Or,</strong> enter up to 3 ingredients below:
+      <p><input type="text" name="ingredient1" class="form-control" placeholder="First Ingredient" value="<%=ingred1%>"></p>
+      <p><input type="text" name="ingredient2" class="form-control" placeholder="Second Ingredient" value="<%=ingred2%>"></p>
+      <p><input type="text" name="ingredient3" class="form-control" placeholder="Third Ingredient" value="<%=ingred3%>"></p>
+      <br>
+      <br>
+      <strong>If needed,</strong> enter up to 3 ingredient restrictions (allergens) below:
+      <p><input type="text" name="allergy1" class="form-control" placeholder="First Allergy" value="<%=aller1%>"></p>
+      <p><input type="text" name="allergy2" class="form-control" placeholder="Second Allergy" value="<%=aller2%>"></p>
+      <p><input type="text" name="allergy3" class="form-control" placeholder="Third Allergy" value="<%=aller3%>"></p>
       <button type="submit" class="btn btn-default">GO!</button>
     </form>
   </div>
   <div class="col-xs-12 col-sm-9">
     <div class="row">
+    <% if (recipes.length > 0) { %>
       <% recipes.forEach(recipe => { %>
         <div class="col-lg-4 col-xs-6 portfolio-item">
           <div class="recipe-image-cropper">
@@ -47,6 +61,9 @@
           </div>
         </div>
       <% }) %>
+    <% } else { %>
+      <h2 class="text-center">Oopsie, no results from your funky search!</h2>
+    <% } %>
     </div>
   </div>
 </div>

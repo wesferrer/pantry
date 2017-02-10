@@ -41,6 +41,9 @@
 	</div>
 
 	<h3>Review:</h3>
+	<% if (!user) { %>
+	Log in to write a review!
+	<% } %>
 	<div id="reviews">
 		<% recipe.reviews.forEach(function(rev) { %>
 			<li>

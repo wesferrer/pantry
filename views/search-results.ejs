@@ -7,7 +7,7 @@
   <% } %>
   <br>
   <br>
-  You searched for: <br><br>
+  YOU SEARCHED FOR: <br><br>
     <strong>Recipe Name:</strong>
     <%= main %><br>
     <strong>Ingredients:</strong>
@@ -17,13 +17,13 @@
     <% if (ingred2) { %> | <% } %>
     <%= ingred3 %>
     <br>
-    <strong>Restrictions (allergies):</strong>
+    <strong>Restrictions/Allergies:</strong>
     <%= aller1 %>
     <% if (aller1) { %> | <% } %>
     <%= aller2 %>
     <% if (aller2) { %> | <% } %>
     <%= aller3 %>
-    <br><br>
+    <br><br><br>
     <form action="/search" method="POST"">
       Search by recipe name:
       <p><input type="text" name="main" class="form-control" placeholder="Chocolate cake" value="<%=main%>"></p>
@@ -35,7 +35,7 @@
       <p><input type="text" name="ingredient3" class="form-control" placeholder="Third Ingredient" value="<%=ingred3%>"></p>
       <br>
       <br>
-      <strong>If needed,</strong> enter up to 3 ingredient restrictions (allergens) below:
+      <strong>If needed,</strong> enter up to 3 ingredients to exclude from your search results:
       <p><input type="text" name="allergy1" class="form-control" placeholder="First Allergy" value="<%=aller1%>"></p>
       <p><input type="text" name="allergy2" class="form-control" placeholder="Second Allergy" value="<%=aller2%>"></p>
       <p><input type="text" name="allergy3" class="form-control" placeholder="Third Allergy" value="<%=aller3%>"></p>
@@ -54,15 +54,13 @@
           <h4><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></h4>
           <p class="text-muted"><strong>Missing ingredients:</strong></p>
           <% recipe.missedIngredients.forEach(r => { %>
-            <%= r.name %>,
+            <%= r.name %>
+            <% if (r.name) { %> | <% } %>
           <% }) %>
+          <br>
           <% if (user) { %>
-            <a href="/recipes/<%= recipe.id %>/fav">Add to Favs</a>
+            <a href="/recipes/<%= recipe.id %>/fav"><div class="glyphicon glyphicon-heart" id="search-heart"></div></a>
           <% } %>
-          <!-- <p class="text-muted">COOK TIME: <%#= recipe.readyInMinutes %></p><br> -->
-          <!-- <p class="text-muted"><strong>Ingredients: </strong> -->
-            <%#= recipe.extendedIngredients.map(ing => ing.name).join(', ') %>
-          <!-- </p> -->
           </div>
         </div>
       <% }) %>

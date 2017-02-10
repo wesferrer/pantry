@@ -242,3 +242,8 @@ div.container-fluid.about-app {
 #search-heart {
   font-size: 30px;
 }
+
+div.glyphicon.glyphicon-star {
+  color: pink;
+  font-size: 18px;
+}

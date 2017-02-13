@@ -59,3 +59,6 @@ We encountered some hurdles during our production time with Pantry in the form o
 ##Unsolved Issues
 > * **Inconsistent API** - Different parts of the API produced different results when it came to producing images for the search results, making it hard to be able to do consistently display images depending on search.
 
+##RESTful API Documentation
+- GET api/recipes
+- GET api/recipes/:id
